@@ -19,8 +19,8 @@ class AppServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     *
+     *@param Charts $charts
+     *@return void
      */
 
     public function boot(Charts $charts)

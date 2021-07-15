@@ -18,6 +18,6 @@ use App\Http\Controllers\MinnersController;
 //     return view('welcome');
 // });
 
-// Route::get('/', [App\Charts\MinnersChart::class, 'handler'])->name('api.chart');
 
-Route::get('/', [MinnersController::class, 'index'])->name('chartjs.index');
+Route::get('/', [MinnersController::class, 'index'])->name('chart.index');
+Route::post('/', [MinnersController::class, 'store'])->name('chart.store');

@@ -4,10 +4,11 @@ declare(strict_types = 1);
 
 namespace App\Charts;
 
-use App\Model\Minner;
+use App\Models\Minner;
 use Chartisan\PHP\Chartisan;
-use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Carbon;
+use ConsoleTVs\Charts\BaseChart;
 
 class MinnersChart extends BaseChart
 {
@@ -21,18 +22,21 @@ class MinnersChart extends BaseChart
     {
         sleep(1);
 
-        // $minners = [
-        //     Minner::select('est_month_payment')->get()->first(),
-        //     Minner::select('current_balance')->get()->first(),
-        //     Minner::select('m5a_est')->get()->first(),
-        // ];
+        $date = Minner::pluck('created_at')->toArray();
+
+        $payout = Minner::pluck('est_month_payment')->toArray();
+        $balance = Minner::pluck('current_balance')->toArray();
+        $m5a = Minner::pluck('m5a_est')->toArray();
+        $x60a = Minner::pluck('x60a_est')->toArray();
+        $x20a = Minner::pluck('x20a_est')->toArray();
+
 
         return Chartisan::build()
-        ->labels(['July 03', 'July 04', 'July 05'])
-        ->dataset('Est Monthly Payout', [0, 0.00868224, 0])
-        ->dataset('Current Balance', [0, 0.005836691, 0])
-        ->dataset('M5a Miner', [0, 0.00001588, 0])
-        ->dataset('X60a Miner', [0, 0.00019525, 0])
-        ->dataset('X20za Miner', [0, .00006569, 0]);
+            ->labels($date)
+            ->dataset('est_month_payment', $payout)
+            ->dataset('current_balance', $balance)
+            ->dataset('m5a_est', $m5a)
+            ->dataset('x60a_est', $x60a)
+            ->dataset('x20a_est', $x20a);
     }
 }
