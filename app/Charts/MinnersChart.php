@@ -20,6 +20,12 @@ class MinnersChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+
+        $getrate = "https://api.alternative.me/v2/ticker/bitcoin/?convert=USD";
+        $price = file_get_contents($getrate);
+        $result = json_decode($price, true);
+        $btc2usd = $result['data'][1]['quotes']['USD']['price'];
+
         sleep(1);
 
         $date = Minner::pluck('created_at')->toArray();
@@ -30,11 +36,17 @@ class MinnersChart extends BaseChart
         $x60a = Minner::pluck('x60a_est')->toArray();
         $x20a = Minner::pluck('x20a_est')->toArray();
 
+        $balanceInUSD=[];
+        foreach($balance as $key => $value)
+        {
+            $balanceInUSD[$key] = $value * $btc2usd;
+        }
 
         return Chartisan::build()
             ->labels($date)
             ->dataset('est_month_payment', $payout)
             ->dataset('current_balance', $balance)
+            ->dataset('current_balance_in_USD', $balanceInUSD)
             ->dataset('m5a_est', $m5a)
             ->dataset('x60a_est', $x60a)
             ->dataset('x20a_est', $x20a);
