@@ -2,17 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use Carbon\Carbon;
+
 use App\Models\Minner;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Http;
-
 
 class MinnersController extends Controller
 {
-    public function index(){
-
+    public function index()
+    {
         return view('welcome');
     }
 
@@ -28,6 +25,6 @@ class MinnersController extends Controller
 
         $data->save();
 
-        return redirect()->route('chart.index');
+        return redirect()->route('minner.index');
     }
 }

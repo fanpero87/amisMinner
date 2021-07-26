@@ -22,17 +22,31 @@
 
 </head>
 
+
 <body class="bg-gray-100">
 
     <div class="w-full p-5 bg-blue-700">
-        <h3 class="flex items-center justify-center text-xl font-bold leading-6 text-white">
-            Amis Minners
-        </h3>
+        <div class="flex items-center justify-evenly">
+            <h3 class="text-xl font-bold leading-6 text-white">
+                Amis Minners
+            </h3>
+
+            <div>
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <a href="route('logout')" onclick="event.preventDefault();
+                        this.closest('form').submit();"
+                        class="flex items-center px-2 py-2 text-base font-medium leading-6 text-black transition duration-150 ease-in-out bg-white rounded-md group focus:outline-none">
+                        {{ __('Log out') }}
+                    </a>
+                </form>
+            </div>
+        </div>
     </div>
 
     <!-- Input Data -->
     <div class="container p-5 mx-10 mt-10 space-y-4 bg-white rounded-lg shadow-md lg:container-md lg:mx-auto">
-        <form action="{{ route('chart.store') }}" method="POST">
+        <form action="{{ route('minner.store') }}" method="POST">
             @csrf
             <div class="flex flex-row items-center space-x-4">
                 <label for="est_month_payment">Est Month Payment</label>
@@ -67,8 +81,6 @@
             </div>
         </form>
     </div>
-
-
     <!-- Chart -->
     <div x-data="{chart: null}" x-init="chart = new Chartisan({
             el: '#minner',

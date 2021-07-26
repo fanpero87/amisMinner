@@ -1,7 +1,6 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\MinnersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,10 +13,20 @@ use App\Http\Controllers\MinnersController;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('auth.login');
+});
+
+Route::middleware('auth')->group(function () {
+
+    Route::get('/dashboard', function () {
+        return view('dashboard');
+    });
 
 
-Route::get('/', [MinnersController::class, 'index'])->name('chart.index');
-Route::post('/', [MinnersController::class, 'store'])->name('chart.store');
+    Route::get('/minners', [App\Http\Controllers\MinnersController::class, 'index'])->name('minner.index');
+    Route::post('/minners', [App\Http\Controllers\MinnersController::class, 'store'])->name('minner.store');
+});
+
+
+require __DIR__ . '/auth.php';
