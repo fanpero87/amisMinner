@@ -10,7 +10,7 @@ class MinnersController extends Controller
 {
     public function index()
     {
-        return view('welcome');
+        return view('add-minner-data');
     }
 
     public function store(Request $request)

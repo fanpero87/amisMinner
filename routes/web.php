@@ -19,13 +19,10 @@ Route::get('/', function () {
 
 Route::middleware('auth')->group(function () {
 
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', [App\Http\Controllers\DashboardController::class, 'index'])->name('dashboard.index');
 
-
-    Route::get('/minners', [App\Http\Controllers\MinnersController::class, 'index'])->name('minner.index');
-    Route::post('/minners', [App\Http\Controllers\MinnersController::class, 'store'])->name('minner.store');
+    Route::get('/add-minner-data', [App\Http\Controllers\MinnersController::class, 'index'])->name('minner.index');
+    Route::post('/add-minner-data', [App\Http\Controllers\MinnersController::class, 'store'])->name('minner.store');
 });
 
 

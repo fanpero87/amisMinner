@@ -12,8 +12,13 @@
 
                 <!-- Navigation Links -->
                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
+                        {{ __('Dashboard') }}
+                    </x-nav-link>
+                </div>
+                <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
                     <x-nav-link :href="route('minner.index')" :active="request()->routeIs('minner.index')">
-                        {{ __('Minners') }}
+                        {{ __('Add Data') }}
                     </x-nav-link>
                 </div>
             </div>
@@ -37,13 +42,16 @@
                         <!-- Authentication -->
                         <form method="POST" action="{{ route('logout') }}">
                             @csrf
-
                             <x-dropdown-link :href="route('logout')"
                                     onclick="event.preventDefault();
                                                 this.closest('form').submit();">
                                 {{ __('Log Out') }}
                             </x-dropdown-link>
                         </form>
+
+                        <x-dropdown-link :href="route('logout')">
+                            {{ __('Change Password') }}
+                        </x-dropdown-link>
                     </x-slot>
                 </x-dropdown>
             </div>
@@ -63,8 +71,13 @@
     <!-- Responsive Navigation Menu -->
     <div :class="{'block': open, 'hidden': ! open}" class="hidden sm:hidden">
         <div class="pt-2 pb-3 space-y-1">
+            <x-responsive-nav-link :href="route('dashboard.index')" :active="request()->routeIs('dashboard.index')">
+                {{ __('Dashboard') }}
+            </x-responsive-nav-link>
+        </div>
+        <div class="pt-2 pb-3 space-y-1">
             <x-responsive-nav-link :href="route('minner.index')" :active="request()->routeIs('minner.index')">
-                {{ __('Minners') }}
+                {{ __('Add Data') }}
             </x-responsive-nav-link>
         </div>
 

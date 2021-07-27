@@ -5,14 +5,13 @@ declare(strict_types=1);
 namespace App\Charts;
 
 use App\Models\Minner;
-use Chartisan\PHP\Chartisan;
-use Illuminate\Http\Request;
 use Illuminate\Support\Carbon;
+use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
+use Illuminate\Http\Request;
 
-class MinnersChart extends BaseChart
+class DashboardChart extends BaseChart
 {
-
     /**
      * Handles the HTTP request for the given chart.
      * It must always return an instance of Chartisan
@@ -20,6 +19,7 @@ class MinnersChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
+
         // Api call to get get the value of a BTC
         $getrate = "https://api.alternative.me/v2/ticker/bitcoin/?convert=USD";
         $price = file_get_contents($getrate);
@@ -32,12 +32,7 @@ class MinnersChart extends BaseChart
             $date[$key] = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y');
         }
 
-        // Grab all the data from the DB and make it and array
-        $payout = Minner::pluck('est_month_payment')->toArray();
         $balance = Minner::pluck('current_balance')->toArray();
-        $m5a = Minner::pluck('m5a_est')->toArray();
-        $x60a = Minner::pluck('x60a_est')->toArray();
-        $x20a = Minner::pluck('x20a_est')->toArray();
 
         // Convert the current balance from BTC to USD and make it an array
         $balanceInUSD = [];
@@ -47,11 +42,6 @@ class MinnersChart extends BaseChart
 
         return Chartisan::build()
             ->labels($date)
-            ->dataset('est_month_payment', $payout)
-            ->dataset('current_balance', $balance)
-            ->dataset('current_balance_in_USD', $balanceInUSD)
-            ->dataset('m5a_est', $m5a)
-            ->dataset('x60a_est', $x60a)
-            ->dataset('x20a_est', $x20a);
+            ->dataset('current_balance_in_USD', $balanceInUSD);
     }
 }
