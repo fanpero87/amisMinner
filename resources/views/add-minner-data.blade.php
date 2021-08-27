@@ -7,33 +7,49 @@
 
     <div class="lg:py-12">
         <!-- Input Data -->
-        <div class="w-auto p-6 mx-4 mt-8 space-y-2 bg-white rounded-lg shadow-md lg:mx-20 lg:space-y-0">
+        <div class="container w-11/12 p-5 mx-auto my-5 space-y-2 bg-white rounded-lg shadow-md lg:container-md lg:space-y-0">
             <form action="{{ route('minner.store') }}" method="POST">
                 @csrf
-                <div class="flex flex-col items-center space-y-2 text-left lg:space-y-0 lg:space-x-4 lg:flex-row">
-                    <label for="est_month_payment">Est Month Payment</label>
-                    <input
-                        class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                        type="text" name="est_month_payment" id="est_month_payment">
+                <div class="grid items-center grid-cols-1 gap-4 space-y-2 lg:grid-cols-3">
 
-                    <label for="current_balance">Current Balance</label>
-                    <input
-                        class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                        type="text" name="current_balance" id="current_balance">
+                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                        <label for="est_month_payment">Est Month Payment</label>
+                        <input
+                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                            type="text" name="est_month_payment" id="est_month_payment">
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                        <label for="current_balance">Current Balance</label>
+                        <input
+                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                            type="text" name="current_balance" id="current_balance">
+                    </div>
+
                 </div>
-                <div class="flex flex-col items-center mt-4 space-y-2 lg:space-y-0 lg:space-x-4 lg:flex-row">
-                    <label for="m5a_est">Estimate Minner m5a</label>
-                    <input
-                        class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                        type="text" name="m5a_est" id="m5a_est">
-                    <label for="x60a_est">Estimate Minner x60a</label>
-                    <input
-                        class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                        type="text" name="x60a_est" id="x60a_est">
-                    <label for="x20a_est">Estimate Minner x20a</label>
-                    <input
-                        class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                        type="text" name="x20a_est" id="x20a_est">
+                <div class="grid items-center grid-cols-1 gap-4 mt-4 space-y-2 text-left lg:grid-cols-3">
+
+                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                        <label for="m5a_est">Est Minner m5a</label>
+                        <input
+                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                            type="text" name="m5a_est" id="m5a_est">
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                        <label for="x60a_est">Est Minner x60a</label>
+                        <input
+                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                            type="text" name="x60a_est" id="x60a_est">
+                    </div>
+
+                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                        <label for="x20a_est">Est Minner x20a</label>
+                        <input
+                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                            type="text" name="x20a_est" id="x20a_est">
+                    </div>
+
                 </div>
                 <hr class="mt-8">
                 <div class="flex justify-end pt-6">
@@ -46,14 +62,14 @@
 
         <!-- Chart -->
         <div x-data="{chart: null}" x-init="chart = new Chartisan({
-                el: '#minner',
-                url: '@chart('minners_chart')',
-                hooks: new ChartisanHooks()
-                    .datasets('line')
-                    .tooltip()
-                    .legend(),
-                });"
-            class="mx-4 my-10 overflow-hidden bg-white rounded-lg shadow-md lg:mx-20">
+            el: '#minner',
+            url: '@chart('minners_chart')',
+            hooks: new ChartisanHooks()
+                .datasets('line')
+                .tooltip()
+                .legend(),
+            });"
+            class="container w-11/12 mx-auto my-10 overflow-hidden bg-white rounded-lg shadow-md lg:container-md">
             <!-- Reload Button -->
             <div class="flex justify-end px-4 py-5 bg-white border-b border-gray-200 sm:px-6">
                 <button x-on:click="chart.update({ background: true })" type="button"
@@ -69,13 +85,11 @@
 
             <!-- Layout -->
             <div id="minner" style="height: 350px;"></div>
-            {{-- style="height: 350px;" --}}
         </div>
 
         <!-- Charting library -->
         <script src="https://unpkg.com/echarts/dist/echarts.min.js"></script>
         <!-- Chartisan -->
         <script src="https://unpkg.com/@chartisan/echarts/dist/chartisan_echarts.js"></script>
-
     </div>
 </x-app-layout>
