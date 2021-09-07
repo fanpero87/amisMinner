@@ -39,6 +39,12 @@ class MinnersChart extends BaseChart
         $x60a = Minner::pluck('x60a_est')->toArray();
         $x20a = Minner::pluck('x20a_est')->toArray();
 
+        // Convert Est Monthy Payment from BTC to USD and make it an array
+        $estpaymentInUSD = [];
+        foreach ($payout as $key => $value) {
+            $estpaymentInUSD[$key] = $value * $btc2usd;
+        }
+
         // Convert the current balance from BTC to USD and make it an array
         $balanceInUSD = [];
         foreach ($balance as $key => $value) {
@@ -47,9 +53,10 @@ class MinnersChart extends BaseChart
 
         return Chartisan::build()
             ->labels($date)
-            ->dataset('est_month_payment', $payout)
-            ->dataset('current_balance', $balance)
-            ->dataset('current_balance_in_USD', $balanceInUSD)
+            ->dataset('Est Monthy Payment in BTC', $payout)
+            ->dataset('Est Monthy Payment in USD', $estpaymentInUSD)
+            ->dataset('Current Balance in BTC', $balance)
+            ->dataset('Current Balance in USD', $balanceInUSD)
             ->dataset('m5a_est', $m5a)
             ->dataset('x60a_est', $x60a)
             ->dataset('x20a_est', $x20a);
