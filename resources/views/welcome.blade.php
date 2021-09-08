@@ -30,8 +30,8 @@
                     <span class="block text-white xl:inline">Son la casa del Manana</span>
                 </h1>
 
-                <div class="mt-3 sm:mt-0 sm:ml-3">
-                    <a href="/" class="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-indigo-700 bg-indigo-100 border border-transparent rounded-md hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
+                <div class="pt-10 sm:mt-0 sm:ml-3">
+                    <a href="/login" class="flex items-center justify-center w-full px-8 py-3 text-base font-medium text-indigo-700 bg-indigo-100 border border-transparent rounded-md hover:bg-indigo-200 md:py-4 md:text-lg md:px-10">
                     Login
                     </a>
                 </div>
