@@ -15,9 +15,9 @@ class CreateExchangeTable extends Migration
     {
         Schema::create('exchange', function (Blueprint $table) {
             $table->id();
-            $table->integer('btc_price_in_USD');
-            $table->integer('balance_in_USD');
-            $table->integer('est_month_payment_in_USD');
+            $table->float('btc_price_in_USD');
+            $table->float('balance_in_USD');
+            $table->float('est_month_payment_in_USD');
             $table->timestamps();
         });
     }

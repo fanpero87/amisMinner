@@ -17,15 +17,15 @@ class MinnersController extends Controller
     public function store(Request $request)
     {
         // Store Daily Data
-        $data = new Minner;
+        // $data = new Minner;
 
-        $data->est_month_payment = $request->est_month_payment;
-        $data->current_balance = $request->current_balance;
-        $data->m5a_est = $request->m5a_est;
-        $data->x60a_est = $request->x60a_est;
-        $data->x20a_est = $request->x20a_est;
+        // $data->est_month_payment = $request->est_month_payment;
+        // $data->current_balance = $request->current_balance;
+        // $data->m5a_est = $request->m5a_est;
+        // $data->x60a_est = $request->x60a_est;
+        // $data->x20a_est = $request->x20a_est;
 
-        $data->save();
+        // $data->save();
 
         // Api call to get get the value of a BTC
         $getrate = "https://api.alternative.me/v2/ticker/bitcoin/?convert=USD";
@@ -38,8 +38,10 @@ class MinnersController extends Controller
         $balanceInBTC = Minner::get('current_balance')->last();
 
         // Convert values from BTC to USD
-        $estpaymentInUSD = $btc2usd * $estpaymentInBTC;
-        $balanceInUSD = $btc2usd * $balanceInBTC;
+        $estpaymentInUSD = $btc2usd * $estpaymentInBTC['est_month_payment'];
+        $balanceInUSD = $btc2usd * $balanceInBTC['current_balance'];
+
+        dd($btc2usd, $estpaymentInUSD,$balanceInUSD, $estpaymentInBTC, $balanceInBTC);
 
         DB::insert('insert into exchange (
             btc_price_in_USD,

@@ -49,9 +49,9 @@
                             </x-dropdown-link>
                         </form>
 
-                        <x-dropdown-link :href="route('logout')">
+                        {{-- <x-dropdown-link :href="route('logout')">
                             {{ __('Change Password') }}
-                        </x-dropdown-link>
+                        </x-dropdown-link> --}}
                     </x-slot>
                 </x-dropdown>
             </div>
