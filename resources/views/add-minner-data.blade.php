@@ -10,47 +10,58 @@
         <div class="container w-11/12 p-5 mx-auto my-5 space-y-2 bg-white rounded-lg shadow-md lg:container-md lg:space-y-0">
             <form action="{{ route('minner.store') }}" method="POST">
                 @csrf
-                <div class="grid items-center grid-cols-1 gap-4 space-y-2 lg:grid-cols-3">
+                    <div class="grid items-center grid-cols-1 gap-4 space-y-2 lg:grid-cols-3">
 
-                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
-                        <label for="est_month_payment">Est Month Payment</label>
-                        <input
-                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                            type="text" name="est_month_payment" id="est_month_payment">
+                        <div class="grid grid-cols-1 space-y-2">
+                            <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                                <label for="est_month_payment">Est Monthly Payment</label>
+                                <input
+                                    class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                                    type="text" name="est_month_payment" id="est_month_payment">
+                            </div>
+
+                            <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                                <label for="current_balance">Current Balance</label>
+                                <input
+                                    class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                                    type="text" name="current_balance" id="current_balance">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 space-y-2">
+                            <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                                <label for="m5a_est">M5a (Est BTC/day)</label>
+                                <input
+                                    class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                                    type="text" name="m5a_est" id="m5a_est">
+                            </div>
+
+                            <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                                <label for="x20a_est">X20a (Est BTC/day)</label>
+                                <input
+                                    class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                                    type="text" name="x20a_est" id="x20a_est">
+                            </div>
+                        </div>
+
+                        <div class="grid grid-cols-1 space-y-2">
+                            <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                                <label for="f40a_est">F40a (Est BTC/day)</label>
+                                <input
+                                    class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                                    type="text" name="f40a_est" id="f40a_est">
+                            </div>
+
+                            <div class="flex items-center justify-end space-x-2 lg:space-x-4">
+                                <label for="x60a_est">X60a (Est BTC/day)</label>
+                                <input
+                                    class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
+                                    type="text" name="x60a_est" id="x60a_est">
+                            </div>
+                        </div>
+
                     </div>
 
-                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
-                        <label for="current_balance">Current Balance</label>
-                        <input
-                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                            type="text" name="current_balance" id="current_balance">
-                    </div>
-
-                </div>
-                <div class="grid items-center grid-cols-1 gap-4 mt-4 space-y-2 text-left lg:grid-cols-3">
-
-                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
-                        <label for="m5a_est">Est Minner m5a</label>
-                        <input
-                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                            type="text" name="m5a_est" id="m5a_est">
-                    </div>
-
-                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
-                        <label for="x60a_est">Est Minner x60a</label>
-                        <input
-                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                            type="text" name="x60a_est" id="x60a_est">
-                    </div>
-
-                    <div class="flex items-center justify-end space-x-2 lg:space-x-4">
-                        <label for="x20a_est">Est Minner x20a</label>
-                        <input
-                            class="p-1 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-600 focus:border-transparent"
-                            type="text" name="x20a_est" id="x20a_est">
-                    </div>
-
-                </div>
                 <hr class="mt-8">
                 <div class="flex justify-end pt-6">
                     <button

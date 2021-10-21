@@ -24,6 +24,7 @@ class MinnersController extends Controller
         $data->m5a_est = $request->m5a_est;
         $data->x60a_est = $request->x60a_est;
         $data->x20a_est = $request->x20a_est;
+        $data->f40a_est = $request->f40a_est;
 
         $data->save();
 
