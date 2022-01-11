@@ -9,6 +9,7 @@ use Illuminate\Support\Carbon;
 use Chartisan\PHP\Chartisan;
 use ConsoleTVs\Charts\BaseChart;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardChart extends BaseChart
 {
@@ -20,28 +21,19 @@ class DashboardChart extends BaseChart
     public function handler(Request $request): Chartisan
     {
 
-        // Api call to get get the value of a BTC
-        $getrate = "https://api.alternative.me/v2/ticker/bitcoin/?convert=USD";
-        $price = file_get_contents($getrate);
-        $result = json_decode($price, true);
-        $btc2usd = $result['data'][1]['quotes']['USD']['price'];
-
-        //Grab the date from the DB date and change the format
-        $date = Minner::pluck('created_at')->toArray();
-        foreach ($date as $key => $value) {
+         //Grab the date from the DB and change the format
+         $date= DB::table('exchange')->pluck('created_at')->toArray();
+         foreach ($date as $key => $value) {
             $date[$key] = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y');
         }
 
-        $balance = Minner::pluck('current_balance')->toArray();
+        // Grab all the data from the DB and make it and array
+         $balance = DB::table('exchange')->pluck('balance_in_USD')->toArray();
+         $btcprice = DB::table('exchange')->pluck('btc_price_in_USD')->toArray();
 
-        // Convert the current balance from BTC to USD and make it an array
-        $balanceInUSD = [];
-        foreach ($balance as $key => $value) {
-            $balanceInUSD[$key] = $value * $btc2usd;
-        }
-
-        return Chartisan::build()
-            ->labels($date)
-            ->dataset('current_balance_in_USD', $balanceInUSD);
+         return Chartisan::build()
+         ->labels($date)
+         ->dataset('Current Balance (USD)', $balance)
+         ->dataset('BTC Price (USD)', $btcprice);
     }
 }

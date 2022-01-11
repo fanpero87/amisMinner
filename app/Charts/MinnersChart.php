@@ -20,13 +20,13 @@ class MinnersChart extends BaseChart
      */
     public function handler(Request $request): Chartisan
     {
-        // Api call to get get the value of a BTC
-        $getrate = "https://api.alternative.me/v2/ticker/bitcoin/?convert=USD";
-        $price = file_get_contents($getrate);
-        $result = json_decode($price, true);
-        $btc2usd = $result['data'][1]['quotes']['USD']['price'];
+        // // Api call to get get the value of a BTC
+        // $getrate = "https://api.alternative.me/v2/ticker/bitcoin/?convert=USD";
+        // $price = file_get_contents($getrate);
+        // $result = json_decode($price, true);
+        // $btc2usd = $result['data'][1]['quotes']['USD']['price'];
 
-        //Grab the date from the DB date and change the format
+        //Grab the date from the DB and change the format
         $date = Minner::pluck('created_at')->toArray();
         foreach ($date as $key => $value) {
             $date[$key] = Carbon::createFromFormat('Y-m-d H:i:s', $value)->format('d/m/Y');
@@ -40,27 +40,13 @@ class MinnersChart extends BaseChart
         $x20a = Minner::pluck('x20a_est')->toArray();
         $f40a = Minner::pluck('f40a_est')->toArray();
 
-        // Convert Est Monthy Payment from BTC to USD and make it an array
-        $estpaymentInUSD = [];
-        foreach ($payout as $key => $value) {
-            $estpaymentInUSD[$key] = $value * $btc2usd;
-        }
-
-        // Convert the current balance from BTC to USD and make it an array
-        $balanceInUSD = [];
-        foreach ($balance as $key => $value) {
-            $balanceInUSD[$key] = $value * $btc2usd;
-        }
-
         return Chartisan::build()
             ->labels($date)
-            ->dataset('Est Monthy Payment in BTC', $payout)
-            ->dataset('Est Monthy Payment in USD', $estpaymentInUSD)
-            ->dataset('Current Balance in BTC', $balance)
-            ->dataset('Current Balance in USD', $balanceInUSD)
-            ->dataset('M5a', $m5a)
-            ->dataset('X60a', $x60a)
-            ->dataset('X20a', $x20a)
-            ->dataset('F40a', $f40a);
+            ->dataset('Est Monthy Payment (BTC)', $payout)
+            ->dataset('Current Balance (BTC)', $balance)
+            ->dataset('Est BTC/day M5a', $m5a)
+            ->dataset('Est BTC/day X60a', $x60a)
+            ->dataset('Est BTC/day X20a', $x20a)
+            ->dataset('Est BTC/day F40a', $f40a);
     }
 }
