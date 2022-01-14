@@ -1,5 +1,6 @@
 version: "3.7"
 services:
+  #Laravel Application
   app:
     build:
       args:
@@ -11,39 +12,52 @@ services:
     container_name: amis-minners-app
     restart: unless-stopped
     working_dir: /var/www/
+    depends_on:
+      - db
     volumes:
       - ./:/var/www
     networks:
-      - minners
+      - nginx-proxy-manager_default
 
+  # Database Service
   db:
-    image: mysql:5.7.33
+    image: mariadb:10.5.6
     container_name: amis-minners-db
     restart: unless-stopped
     environment:
-      MYSQL_DATABASE: ${DB_DATABASE}
-      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
-      MYSQL_PASSWORD: ${DB_PASSWORD}
-      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_DATABASE: laravel_minner
+      MYSQL_ROOT_PASSWORD: secret
+      MYSQL_PASSWORD: secret
+      MYSQL_USER: laravel
       SERVICE_TAGS: dev
       SERVICE_NAME: mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
+    ports:
+      - 3307:3306
     networks:
-      - minners
+      - nginx-proxy-manager_default
 
+  # Webserver Service
   nginx:
-    image: nginx:alpine
+    image: nginx:latest
     container_name: amis-minners-nginx
     restart: unless-stopped
     ports:
-      - 8100:8100
+      - 8005:80
+    depends_on:
+      - db
+      - app
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d/
+      - ./docker-compose/nginx:/etc/nginx/conf.d
     networks:
-      - minners
+      - nginx-proxy-manager_default
 
 networks:
-  minners:
+  nginx-proxy-manager_default:
     driver: bridge
+
+volumes:
+  amis-minners_data:
+    driver: local
