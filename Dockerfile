@@ -14,22 +14,6 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nano \
-    vim \
-    libpng-dev \
-    libonig-dev \
-    libxml2-dev \
-    libzip-dev \
-    libicu-dev \
-    libbz2-dev \
-    libpng-dev \
-    libjpeg-dev \
-    libmcrypt-dev \
-    libreadline-dev \
-    libfreetype6-dev \
-    libmemcached-dev \
-    zlib1g-dev \
-    libzip-dev \
-    libssl-dev \
     -y mariadb-client
 
 # Clear cache
