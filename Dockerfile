@@ -14,6 +14,9 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nano \
+    libpng-dev \
+    libonig-dev \
+    libxml2-dev \
     -y mariadb-client
 
 # Clear cache
@@ -26,7 +29,7 @@ RUN docker-php-ext-install zip mysqli pdo_mysql mbstring exif pcntl bcmath gd &&
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root,adm,sudo -u $uid -d /home/$user $user
+RUN useradd -aG www-data,root,adm,sudo -u $uid -d /home/$user $user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 

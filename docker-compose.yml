@@ -4,7 +4,7 @@ services:
   app:
     build:
       args:
-        user: fanpero
+        user: minner
         uid: 1000
       context: ./
       dockerfile: Dockerfile
@@ -17,7 +17,7 @@ services:
     volumes:
       - ./:/var/www
     networks:
-      - nginx-proxy-manager_default
+      - amis-minners_default
 
   # Database Service
   db:
@@ -33,10 +33,12 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
+      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker-compose/mysql/database.sql:/docker-entrypoint-initdb.d
     ports:
       - 3307:3306
     networks:
-      - nginx-proxy-manager_default
+      - amis-minners_default
 
   # Webserver Service
   nginx:
@@ -52,10 +54,10 @@ services:
       - ./:/var/www
       - ./docker-compose/nginx:/etc/nginx/conf.d
     networks:
-      - nginx-proxy-manager_default
+      - amis-minners_default
 
 networks:
-  nginx-proxy-manager_default:
+  amis-minners_default:
     driver: bridge
 
 volumes:
