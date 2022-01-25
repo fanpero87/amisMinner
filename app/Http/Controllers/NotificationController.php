@@ -23,8 +23,8 @@ class NotificationController extends Controller
                 'email' => $request->get('email'),
                 'comment' => $request->get('comment') ],
                 function ($message) {
-                        $message->from('noreply@amiscloud.com');
-                        $message->to('fanpero87@gmail.com', 'Fabito el Lindo')
+                        $message->from('noreply@example.com');
+                        $message->to('contact@example.com', 'This is a User')
                         ->subject('Your Website Contact Form');
         });
 
