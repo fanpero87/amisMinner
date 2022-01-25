@@ -34,19 +34,19 @@ services:
     volumes:
       - ./mysql/data:/var/lib/mysql
       - ./docker-files/mysql/my.cnf:/etc/mysql/my.cnf
-      - ./docker-files/mysql/database.sql:/docker-entrypoint-initdb.d
     ports:
-      - 3307:3306
+      - 3306:3306
     networks:
       - amis-minners_default
 
   # Webserver Service
   nginx:
-    image: nginx:latest
+    image: nginx:alpine
     container_name: amis-minners-nginx
     restart: unless-stopped
     ports:
-      - 8005:80
+      - 8180:80
+      - 8143:443
     depends_on:
       - db
       - app
