@@ -9,3 +9,9 @@ php artisan make:chart MinnersChart
 ```
 
 Register chart on `App\Providers\AppServiceProvider`
+
+# Deploy the APP using Docker
+
+$ git clone https://github.com/fanpero87/amisMinner.git
+$ cd amisMinner
+$

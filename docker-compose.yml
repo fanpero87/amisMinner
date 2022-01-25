@@ -33,8 +33,8 @@ services:
       SERVICE_NAME: mysql
     volumes:
       - ./mysql/data:/var/lib/mysql
-      - ./docker-compose/mysql/my.cnf:/etc/mysql/my.cnf
-      - ./docker-compose/mysql/database.sql:/docker-entrypoint-initdb.d
+      - ./docker-files/mysql/my.cnf:/etc/mysql/my.cnf
+      - ./docker-files/mysql/database.sql:/docker-entrypoint-initdb.d
     ports:
       - 3307:3306
     networks:
@@ -52,7 +52,7 @@ services:
       - app
     volumes:
       - ./:/var/www
-      - ./docker-compose/nginx:/etc/nginx/conf.d
+      - ./docker-files/nginx:/etc/nginx/conf.d
     networks:
       - amis-minners_default
 
