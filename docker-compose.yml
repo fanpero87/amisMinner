@@ -41,7 +41,7 @@ services:
 
   # Webserver Service
   nginx:
-    image: nginx:alpine
+    image: nginx:latest
     container_name: amis-minners-nginx
     restart: unless-stopped
     ports:
