@@ -1,24 +1,24 @@
 <x-app-layout>
-    <x-slot name="header">
+    {{-- <x-slot name="header">
         <h2 class="text-xl font-semibold leading-tight text-gray-800">
             {{ __('Dashboard') }}
         </h2>
-    </x-slot>
+    </x-slot> --}}
 
     <div class="lg:py-12">
-        <div x-data="{chart: null}" x-init="chart = new Chartisan({
+        <div v x-data="{ chart: null }" x-init="chart = new Chartisan({
             el: '#dashboard',
             url: '@chart('dashboard_chart')',
             hooks: new ChartisanHooks()
                 .datasets('line')
                 .tooltip()
                 .legend(),
-            });"
-            class="container w-11/12 mx-auto my-10 overflow-hidden bg-white rounded-lg shadow-md lg:container-md">
+        });"
+            class="container w-11/12 mx-auto my-10 overflow-hidden rounded-lg shadow-md lg:container-md">
             <!-- Reload Button -->
-            <div class="flex justify-end px-4 py-5 bg-white border-b border-gray-200 sm:px-6">
+            <div class="flex justify-end px-4 py-5 border-b border-gray-200 bg-slate-800 sm:px-6">
                 <button x-on:click="chart.update({ background: true })" type="button"
-                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-500 focus:outline-none focus:shadow-outline-indigo focus:border-indigo-700 active:bg-indigo-700">
+                    class="relative inline-flex items-center px-4 py-2 text-sm font-medium leading-5 text-white border border-transparent rounded-md focus:shadow-outline-sky bg-sky-500/50 hover:bg-sky-500 focus:border-sky-700 focus:outline-none active:bg-sky-700">
                     <svg class="w-6 h-6 text-white" fill="none" stroke-linecap="round" stroke-linejoin="round"
                         stroke-width="2" viewBox="0 0 24 24" stroke="currentColor">
                         <path
@@ -29,7 +29,7 @@
             </div>
 
             <!-- Layout -->
-            <div id="dashboard" style="height: 350px;"></div>
+            <div id="dashboard" class="bg-slate-800" style="height: 350px;"></div>
         </div>
 
         <!-- Charting library -->
