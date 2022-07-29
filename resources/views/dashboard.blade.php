@@ -29,7 +29,7 @@
             </div>
 
             <!-- Layout -->
-            <div id="dashboard" class="bg-slate-800" style="height: 350px;"></div>
+            <div id="dashboard" class="bg-white" style="height: 350px;"></div>
         </div>
 
         <!-- Charting library -->

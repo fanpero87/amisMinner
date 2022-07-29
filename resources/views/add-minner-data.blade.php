@@ -95,7 +95,7 @@
             </div>
 
             <!-- Layout -->
-            <div id="minner" class="bg-slate-800" style="height: 350px;"></div>
+            <div id="minner" class="bg-white" style="height: 350px;"></div>
         </div>
 
         <!-- Charting library -->
