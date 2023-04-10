@@ -17,7 +17,7 @@ $ cp .env.example .env
 Create containers (this may take a moment)
 
 ```
-$ docker-compose up -d --build
+$ docker-compose up -d
 ```
 
 The result should look like this
@@ -58,6 +58,14 @@ Once inside the container, install the composer dependencies, generate the app k
 $ composer install
 $ php artisan key:generate
 $ php artisan migrate
+```
+
+Another option is to run the previous commands without connecting to the container. You could run something like this:
+
+```
+$ docker-compose exec composer install
+$ docker-compose exec php artisan key:generate
+$ docker-compose exec php artisan migrate
 ```
 
 ## Step 4: Congrats

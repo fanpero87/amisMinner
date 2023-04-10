@@ -6,7 +6,7 @@ services:
       args:
         user: minner
         uid: 1000
-      context: ./
+      context: .
       dockerfile: Dockerfile
     image: amis-minners
     container_name: amis-minners-app
@@ -16,6 +16,7 @@ services:
       - db
     volumes:
       - ./:/var/www
+      - ./docker-files/php/laravel.ini:/usr/local/etc/php/conf.d/laravel.ini
     networks:
       - amis-minners_default
 
@@ -45,10 +46,9 @@ services:
     container_name: amis-minners-nginx
     restart: unless-stopped
     ports:
-      - 8180:80
-      - 8143:443
+      - 80:80
+      - 443:443
     depends_on:
-      - db
       - app
     volumes:
       - ./:/var/www
@@ -56,10 +56,12 @@ services:
     networks:
       - amis-minners_default
 
+# Docker Networks
 networks:
   amis-minners_default:
     driver: bridge
 
+# Docker Volumes
 volumes:
   amis-minners_data:
     driver: local
