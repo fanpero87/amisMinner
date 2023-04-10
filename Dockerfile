@@ -10,6 +10,10 @@ RUN apt-get update && apt-get install -y \
     zip \
     unzip \
     nano \
+    vim \
+    sudo \
+    npm \
+    node \
     libpng-dev \
     libonig-dev \
     libxml2-dev \

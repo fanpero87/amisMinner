@@ -1,11 +1,11 @@
 <?php
 
-
 namespace App\Charts;
 
 use ConsoleTVs\Charts\Classes\Chartjs\Chart;
 
-class DashboardChart extends Chart
+
+class SampleChart extends Chart
 {
     /**
      * Initializes the chart.
