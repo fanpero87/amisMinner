@@ -1,4 +1,4 @@
-FROM php:8.1.0alpha1-fpm
+FROM php:8.1-fpm
 
 # Install system dependencies
 RUN apt-get update && apt-get install -y \
@@ -13,7 +13,7 @@ RUN apt-get update && apt-get install -y \
     vim \
     sudo \
     npm \
-    node \
+    nodejs \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
@@ -30,11 +30,14 @@ RUN docker-php-ext-install zip mysqli pdo_mysql mbstring exif pcntl bcmath gd &&
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
 # Arguments defined in docker-compose.yml
-ARG user=minner
-ARG uid=1000
+ARG user
+ARG uid
 
 # Create system user to run Composer and Artisan Commands
-RUN useradd -G www-data,root,adm,sudo -u $uid -d /home/$user $user
+RUN useradd -rm -d /home/$user -s /bin/bash -p "$(openssi passwd -1 $user)" $user
+RUN usermod --uid $uid --gid $uid $user
+RUN usermod -aG www-data, root, adm, sudo
+RUN echo $user ALL-\(root\ NOPASSWD:ALL > /etc/sudoers.d/$user
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
