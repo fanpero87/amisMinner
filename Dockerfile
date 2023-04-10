@@ -43,10 +43,8 @@ RUN usermod -aG www-data, sudo
 RUN mkdir -p /home/$user/.composer && \
     chown -R $user:$user /home/$user
 
-# Assign permissions of the working directory to the www-data user
-RUN chown -R www-data:www-data \
-        /var/www/storage \
-        /var/www/bootstrap/cache
+# Assign permissions of the working directory to the nimmer user
+RUN chown -R minner:minner /var/www/
 
 USER $user
 
